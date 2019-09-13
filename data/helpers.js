@@ -25,9 +25,13 @@ function addProject(project) {
     });
 }
 
-function addTask(task) {
+function addTask(task, project_id) {
+    const newTask = {
+        ...task,
+        project_id: project_id
+    }
     return db('tasks')
-    .insert(task)
+    .insert(newTask)
     .then(ids => {
         return ids
     });
@@ -39,6 +43,24 @@ function getResources() {
 
 function getProjects() {
     return db('projects')
+    .then(data => {
+        const updatedBoolArray = data.map(project => {
+            if(project.completed){
+                const updatedBool = {
+                    ...project,
+                    completed: true
+                };
+                return updatedBool;
+            } else {
+                const updatedBool = {
+                    ...project,
+                    completed: false
+                };
+                return updatedBool;
+            }
+        });
+        return updatedBoolArray;
+    })
 }
 
 function getTasks() {
@@ -48,10 +70,25 @@ function getTasks() {
     't.task_id', 
     't.description', 
     't.notes', 
-    't.completed',
-    'p.name',
-    'p.description')
+    't.completed as task_completed',
+    'p.name as project_name',
+    'p.description as project_description')
     .then(data => {
-        console.log(data);
+        const updatedBoolArray = data.map(task => {
+            if(task.task_completed){
+                const updatedBool = {
+                    ...task,
+                    task_completed: true
+                };
+                return updatedBool;
+            } else {
+                const updatedBool = {
+                    ...task,
+                    task_completed: false
+                };
+                return updatedBool;
+            }
+        });
+        return updatedBoolArray;
     })
 }
