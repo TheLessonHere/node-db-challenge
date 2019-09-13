@@ -39,7 +39,7 @@ Commit your code regularly and use descriptive messages. This helps both you (in
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 - [ ] Explain the difference between `Relational Databases` and `SQL`.
-SQL is the language used to query a database based off it's values.
+SQL is the language used to query a database based off its values.
 
 - [ ] Why do tables need a `primary key`?
 So that they have a unique indentifier that allows a query to select them specifically.
